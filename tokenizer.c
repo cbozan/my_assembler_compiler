@@ -5,14 +5,16 @@
 */
 
 #include <stdio.h>
+#include <stdlib.h>
+#include "tokenizer.h"
 
-#define MAX_SYMBOL 23 
-#define SOURCE_CODE_BUFFER 2048 
-#define MAX_TOKEN_LENGTH 32 
+#define MAX_SYMBOL 23
+#define SOURCE_CODE_BUFFER 2048
+#define MAX_TOKEN_LENGTH 32
 #define MAX_PATH_LENGTH 128
 
 
-int main( void ){
+char **tokenizer( void ){
 	
 	const char symbolTable[MAX_SYMBOL] = {'+', '-', '*', '/', '%', '=', '!', '>', '<', '&', 
 											'|', '(', ')', ';', ',', '"', '[', ']', '{', '}', ' ', '\n', '\t'};
@@ -21,7 +23,11 @@ int main( void ){
 	char sourceCode[SOURCE_CODE_BUFFER];
 	
 	// holds lexical strings
-	char tokenHolder[SOURCE_CODE_BUFFER][MAX_TOKEN_LENGTH];
+	char **tokenHolder = (char **)malloc(sizeof(char *) * SOURCE_CODE_BUFFER);
+	int i;
+	for(i = 0; i < SOURCE_CODE_BUFFER; i++){
+		tokenHolder[i] = (char *)malloc(sizeof(char) * MAX_TOKEN_LENGTH);
+	}
 	
 	unsigned int cursor = 0;
 	char path[MAX_PATH_LENGTH];
@@ -76,15 +82,19 @@ int main( void ){
 						
 					}
 					
-					// (i = head) example: ++, += 
-					if( tempCount != 0)
+					// (i != head) example: ++, += 
+					if( tempCount != 0){
+						tokenHolder[tokenHolderCursor][tempCount] = '\0';
 						tokenHolderCursor++;
+					}
+						
 					
 					if( sourceCode[head] != ' '
 						&& sourceCode[head] != '\t'
 						&& sourceCode[head] != '\n'){
 						
 						tokenHolder[tokenHolderCursor][0] = sourceCode[head];
+						tokenHolder[tokenHolderCursor][1] = '\0';
 						tokenHolderCursor++;
 								
 					}
@@ -97,17 +107,12 @@ int main( void ){
 		}
 		
 		
-		printf("\n\n%80s\n\n", "--------------------------------- TOKENIZED SOURCE CODE ---------------------------------");
-		puts("{\n");
-		for(i = 0; i < tokenHolderCursor; i++)
-			printf("%s,", tokenHolder[i]);
-		printf("\n\n}");
+		tokenHolder[tokenHolderCursor][0] = '\0';
 			
 		printf("\n\n%80s\n\n", "--------------------------------- SOURCE CODE ---------------------------------");
 		printf("%s", sourceCode);
 		
 	}
 	
-	getch();
-	return 0;
-}
+	return tokenHolder;
+} 
