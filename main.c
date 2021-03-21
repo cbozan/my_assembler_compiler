@@ -2,6 +2,7 @@
 #include "tokenizer.h"
 
 int main( void ){
+	
 	char **ptr = tokenizer();
 	
 	printf("\n\n%80s\n\n", "--------------------------------- TOKENIZED SOURCE CODE ---------------------------------");
@@ -11,5 +12,6 @@ int main( void ){
 		printf("%s,", ptr[i]);
 		++i;
 	}
+	
 	
 }
