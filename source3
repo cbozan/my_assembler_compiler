@@ -1,0 +1,9 @@
+HRK AX, 0
+HRK BX, 1
+HRK CX, 11
+loop:
+	TOP AX, BX
+	TOP BX, 1
+	HRK DX, BX
+	CIK DX, CX
+	SN loop
