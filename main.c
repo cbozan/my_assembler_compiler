@@ -5,7 +5,7 @@ int main( void ){
 	
 	char **ptr = tokenizer();
 	
-	printf("\n\n%80s\n\n", "--------------------------------- TOKENIZED SOURCE CODE ---------------------------------");
+	printf("\n%80s\n", "--------------------------------- TOKENIZED SOURCE CODE ---------------------------------");
 	puts("{\n");
 	int i = 0;
 	while(ptr[i][0] != '\0'){
@@ -13,5 +13,8 @@ int main( void ){
 		++i;
 	}
 	
+	puts("\n");
+	
+	return 0;
 	
 }

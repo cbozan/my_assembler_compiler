@@ -114,31 +114,35 @@ int main( void ){
 		}
 	
 	
-		printf("\n\n\033[94mCompilation results:\033[0m ");
+		printf("\n\033[94mCompilation results:\033[0m ");
 		
 		
 		if(durum){
 			
-			printf("\033[32mSuccessful\033[0m\n\n");	
+			printf("\033[32mSuccessful\033[0m");	
 			
 		} else{
 			
-			printf("\n\n%d. token bad code..\n", (cursor + 1));			// cursorin gösteridiði (hatalý olan) karakteri yaz.
+			printf("\n\033[33m%d. token bad code..\033[0m", (cursor + 1));			// cursorin gösteridiði (hatalý olan) karakteri yaz.
 			
-			printf("\nPart up to the wrong code:\n\n");
+			printf("\nPart up to the wrong code:\n");
 			
 			unsigned int x;			
 			for(x = 0; x < cursor + 1; x++){										// hatalý yazým olan kod'a(cursor'e) kadar yazdýr
-				printf("%s", tokens[x]);
+				printf("\033[31m%s\033[0m", tokens[x]);
 			}
 			
 			if(err[0] != '\0'){												// eðer hatalý kod 'id' ise id'yi yazdýr.
-				printf("\n\n\n\033[31mError:\033[0m \033[33m%s\n\n\n\033[0m", err);
+				printf("\n\033[31mError:\033[0m \033[33m%s\033[0m", err);
+			} else{
+				printf("\n");
 			}
 			
 		} 
 	
-	}	// else sonu		
+	}
+	
+	return 0;
 	
 }
 
@@ -426,7 +430,7 @@ void tokenizer(char tokens [][MAX_TOKEN_LENGTH] , char sourceCode [] , const cha
 void sourceCodePrint(char *sourceCode, int size){
 	
 	// kaynak kodu yaz
-	printf("\n\n%80s\n\n", "--------------------------------- SOURCE CODE ---------------------------------");
+	printf("\n%80s\n", "--------------------------------- SOURCE CODE ---------------------------------");
 	printf("%s", sourceCode);
 	
 	
@@ -436,12 +440,12 @@ void sourceCodePrint(char *sourceCode, int size){
 void tokensPrint(char tokens[][MAX_TOKEN_LENGTH], int size){
 	
 	// kelimeleþtirilmiþ kaynak kodu yaz
-		printf("\n\n%80s\n\n", "--------------------------------- TOKENIZER ---------------------------------");
+		printf("\n%80s\n", "--------------------------------- TOKENIZER ---------------------------------");
 		puts("{\n");
 		size_t i = 0;
 		for(i = 0; i < size; i++)
 			printf("%s,", tokens[i]);
-		printf("\n\n}");
+		printf("\n}");
 		
 }
 

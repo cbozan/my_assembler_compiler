@@ -1,7 +1,5 @@
-if(A>B{
+if(A>B){
 	A=D
-} else if(B>D){
-	A=C
 } else{
 	D=C
 }

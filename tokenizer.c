@@ -109,7 +109,7 @@ char **tokenizer( void ){
 		
 		tokenHolder[tokenHolderCursor][0] = '\0';
 			
-		printf("\n\n%80s\n\n", "--------------------------------- SOURCE CODE ---------------------------------");
+		printf("\n%80s\n", "--------------------------------- SOURCE CODE ---------------------------------");
 		printf("%s", sourceCode);
 		
 	}
